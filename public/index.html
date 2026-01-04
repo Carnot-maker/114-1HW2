@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>MVC 分層測試</title>
+</head>
+<body>
+    <h1>MVC 搜尋用戶</h1>
+    <input type="text" id="username" value="卡布奇諾">
+    <button onclick="search()">搜尋</button>
+    <p id="result"></p>
+
+    <script>
+        async function search() {
+            const name = document.getElementById('username').value;
+            // 呼叫後端 API
+            const res = await fetch(`/api/user?name=${name}`);
+            const data = await res.json();
+            document.getElementById('result').innerText = 
+                `${res.status} - ${data.message} ${data.data ? JSON.stringify(data.data) : ''}`;
+        }
+    </script>
+</body>
+</html>
